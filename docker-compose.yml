@@ -1,0 +1,25 @@
+version: "3.9"
+
+services:
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "M@NJEET123"
+    ports:
+      - "1433:1433"
+    restart: always
+
+  api:
+    build:
+      context: .
+    container_name: buildapi
+    depends_on:
+      - sqlserver
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_URLS: "http://+:8080"
+      ConnectionStrings__dbcs: "Server=sqlserver;Database=Student25;User Id=sa;Password=M@NJEET123;TrustServerCertificate=True;"
+    restart: always
