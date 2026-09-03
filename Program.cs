@@ -24,6 +24,8 @@ namespace BuildAPI
 
             var app = builder.Build();
 
+            var testValue = builder.Configuration["MyTestSetting"];
+
             // Swagger - enabled on Azure Production also
             app.UseSwagger();
             app.UseSwaggerUI();
