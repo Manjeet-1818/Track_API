@@ -11,23 +11,22 @@ namespace BuildAPI
             // Add services to the container
             builder.Services.AddControllers();
 
-            // Add OpenAPI (Swagger alternative in .NET 8)
+            // Add Swagger
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             // Database connection
             builder.Services.AddDbContext<Models.Student25Context>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
+                options.UseSqlServer(
+                    builder.Configuration.GetConnectionString("dbcs")
+                )
+            );
 
             var app = builder.Build();
 
-            // Configure HTTP request pipeline
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-
-            }
+            // Swagger - enabled on Azure Production also
+            app.UseSwagger();
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 
