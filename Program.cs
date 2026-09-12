@@ -1,4 +1,6 @@
+
 using Microsoft.EntityFrameworkCore;
+using BuildAPI.services;
 
 namespace BuildAPI
 {
@@ -10,6 +12,8 @@ namespace BuildAPI
 
             // Add services to the container
             builder.Services.AddControllers();
+        
+            builder.Services.AddSingleton<AzureBlobService>();
 
             // Add Swagger
             builder.Services.AddEndpointsApiExplorer();
@@ -21,6 +25,8 @@ namespace BuildAPI
                     builder.Configuration.GetConnectionString("dbcs")
                 )
             );
+
+    
 
             var app = builder.Build();
 
