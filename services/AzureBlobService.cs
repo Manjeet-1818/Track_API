@@ -15,7 +15,7 @@ namespace BuildAPI.services
                 new DefaultAzureCredential()
             );
 
-            _containerClient = blobServiceClinet.GetBlobContainerClient("documnets");
+            _containerClient = blobServiceClinet.GetBlobContainerClient("documents");
         }
 
         public async Task UploadFileAsync(Stream fileStream,string fileName,string contentType)
